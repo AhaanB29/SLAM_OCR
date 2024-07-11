@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/ahaanbanerjee/SLAM_OCR/build",
+  "command": "/usr/lib/ccache/c++   -isystem /usr/local/include/opencv4  -g   -std=gnu++11 -o CMakeFiles/OCR.dir/func.cpp.o -c /home/ahaanbanerjee/SLAM_OCR/func.cpp",
+  "file": "/home/ahaanbanerjee/SLAM_OCR/func.cpp"
+}
+]
