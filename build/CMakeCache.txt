@@ -144,7 +144,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=OCR
+CMAKE_PROJECT_NAME:STATIC=SLAM_OCR
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -208,14 +208,26 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
-//Value Computed by CMake
-OCR_BINARY_DIR:STATIC=/home/ahaanbanerjee/SLAM_OCR/build
-
-//Value Computed by CMake
-OCR_SOURCE_DIR:STATIC=/home/ahaanbanerjee/SLAM_OCR
+//The directory containing a CMake configuration file for Leptonica.
+Leptonica_DIR:PATH=Leptonica_DIR-NOTFOUND
 
 //The directory containing a CMake configuration file for OpenCV.
 OpenCV_DIR:PATH=/usr/local/lib/cmake/opencv4
+
+//Value Computed by CMake
+SLAM_OCR_BINARY_DIR:STATIC=/home/ahaanbanerjee/SLAM_OCR/build
+
+//Value Computed by CMake
+SLAM_OCR_SOURCE_DIR:STATIC=/home/ahaanbanerjee/SLAM_OCR
+
+//The directory containing a CMake configuration file for Tesseract.
+Tesseract_DIR:PATH=Tesseract_DIR-NOTFOUND
+
+//Value Computed by CMake
+YourProjectName_BINARY_DIR:STATIC=/home/ahaanbanerjee/SLAM_OCR/build
+
+//Value Computed by CMake
+YourProjectName_SOURCE_DIR:STATIC=/home/ahaanbanerjee/SLAM_OCR
 
 
 ########################

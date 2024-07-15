@@ -8,7 +8,7 @@
 					"build" : ".",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.10"
+						"string" : "3.16"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -26,7 +26,7 @@
 					[
 						0
 					],
-					"name" : "OCR",
+					"name" : "SLAM_OCR",
 					"targetIndexes" : 
 					[
 						0
@@ -37,9 +37,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "OCR::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-OCR-Debug-f8c0538729ee81f7a90f.json",
-					"name" : "OCR",
+					"id" : "ocr::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ocr-Debug-c0c1613166316ce572ca.json",
+					"name" : "ocr",
 					"projectIndex" : 0
 				}
 			]

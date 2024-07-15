@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ahaanbanerjee/SLAM_OCR/func.cpp" "/home/ahaanbanerjee/SLAM_OCR/build/CMakeFiles/OCR.dir/func.cpp.o"
+  "/home/ahaanbanerjee/SLAM_OCR/func.cpp" "/home/ahaanbanerjee/SLAM_OCR/build/CMakeFiles/ocr.dir/func.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

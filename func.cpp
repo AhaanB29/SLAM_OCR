@@ -2,6 +2,47 @@
 #include <opencv2/dnn.hpp>
 #include <iostream>
 #include <chrono>
+#include <opencv2/text.hpp>
+#include <tesseract/baseapi.h>
+#include <leptonica/allheaders.h>
+
+#include <string>
+ tesseract::TessBaseAPI *tess = new tesseract::TessBaseAPI();
+
+// Function to create a template for a character
+std::string recognizeText(const cv::Mat& image) {
+    // Convert the image to grayscale
+    cv::Mat gray;
+    if (image.channels() == 3) {
+        cv::cvtColor(image, gray, cv::COLOR_BGR2GRAY);
+    } else {
+        gray = image.clone();
+    }
+
+    // Optional: Apply additional preprocessing if needed
+    // cv::threshold(gray, gray, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
+
+    // Convert the grayscale image to PIX format
+    PIX* pixImage = pixCreate(gray.cols, gray.rows, 8);
+    for (int y = 0; y < gray.rows; y++) {
+        for (int x = 0; x < gray.cols; x++) {
+            pixSetPixel(pixImage, x, y, gray.at<uchar>(y, x));
+        }
+    }
+
+    // Set the image in Tesseract
+    tess->SetImage(pixImage);
+
+    // Perform OCR
+    char* outText = tess->GetUTF8Text();
+    std::string result(outText);
+
+    // Clean up
+    delete[] outText;
+    pixDestroy(&pixImage);
+
+    return result;
+}
 
 void detectText(cv::Mat& frame, cv::dnn::Net& net) {
     // Prepare the input blob
@@ -75,7 +116,21 @@ void detectText(cv::Mat& frame, cv::dnn::Net& net) {
         for (int j = 0; j < 4; ++j) {
             cv::line(frame, vertices[j], vertices[(j + 1) % 4], cv::Scalar(0, 255, 0), 2);
         }
-}
+        cv::Rect roi = box.boundingRect();
+        roi &= cv::Rect(0, 0, frame.cols, frame.rows);  // Ensure ROI is within frame bounds
+        cv::Mat cropped = frame(roi);
+
+        // Recognize text
+        if (tess->Init(NULL, "eng", tesseract::OEM_LSTM_ONLY)) {
+        std::cerr << "Could not initialize tesseract." << std::endl;
+        return;
+        }
+
+        std::string text = recognizeText(cropped);
+
+        // Draw recognized text
+        cv::putText(frame, text, box.center, cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 255), 2);
+    }
 }
 
 int main() {

@@ -839,7 +839,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "OCR"
+			"value" : "SLAM_OCR"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1134,28 +1134,16 @@
 			"value" : "[/usr/local][v4.6.0()]"
 		},
 		{
-			"name" : "OCR_BINARY_DIR",
+			"name" : "Leptonica_DIR",
 			"properties" : 
 			[
 				{
 					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
+					"value" : "The directory containing a CMake configuration file for Leptonica."
 				}
 			],
-			"type" : "STATIC",
-			"value" : "/home/ahaanbanerjee/SLAM_OCR/build"
-		},
-		{
-			"name" : "OCR_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/home/ahaanbanerjee/SLAM_OCR"
+			"type" : "PATH",
+			"value" : "Leptonica_DIR-NOTFOUND"
 		},
 		{
 			"name" : "OpenCV_DIR",
@@ -1168,6 +1156,66 @@
 			],
 			"type" : "PATH",
 			"value" : "/usr/local/lib/cmake/opencv4"
+		},
+		{
+			"name" : "SLAM_OCR_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/ahaanbanerjee/SLAM_OCR/build"
+		},
+		{
+			"name" : "SLAM_OCR_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/ahaanbanerjee/SLAM_OCR"
+		},
+		{
+			"name" : "Tesseract_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for Tesseract."
+				}
+			],
+			"type" : "PATH",
+			"value" : "Tesseract_DIR-NOTFOUND"
+		},
+		{
+			"name" : "YourProjectName_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/ahaanbanerjee/SLAM_OCR/build"
+		},
+		{
+			"name" : "YourProjectName_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/ahaanbanerjee/SLAM_OCR"
 		}
 	],
 	"kind" : "cache",

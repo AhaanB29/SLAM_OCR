@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named OCR
+# Target rules for targets named ocr
 
 # Build rule for target.
-OCR: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 OCR
-.PHONY : OCR
+ocr: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ocr
+.PHONY : ocr
 
 # fast build rule for target.
-OCR/fast:
-	$(MAKE) -f CMakeFiles/OCR.dir/build.make CMakeFiles/OCR.dir/build
-.PHONY : OCR/fast
+ocr/fast:
+	$(MAKE) -f CMakeFiles/ocr.dir/build.make CMakeFiles/ocr.dir/build
+.PHONY : ocr/fast
 
 func.o: func.cpp.o
 
@@ -129,7 +129,7 @@ func.o: func.cpp.o
 
 # target to build an object file
 func.cpp.o:
-	$(MAKE) -f CMakeFiles/OCR.dir/build.make CMakeFiles/OCR.dir/func.cpp.o
+	$(MAKE) -f CMakeFiles/ocr.dir/build.make CMakeFiles/ocr.dir/func.cpp.o
 .PHONY : func.cpp.o
 
 func.i: func.cpp.i
@@ -138,7 +138,7 @@ func.i: func.cpp.i
 
 # target to preprocess a source file
 func.cpp.i:
-	$(MAKE) -f CMakeFiles/OCR.dir/build.make CMakeFiles/OCR.dir/func.cpp.i
+	$(MAKE) -f CMakeFiles/ocr.dir/build.make CMakeFiles/ocr.dir/func.cpp.i
 .PHONY : func.cpp.i
 
 func.s: func.cpp.s
@@ -147,7 +147,7 @@ func.s: func.cpp.s
 
 # target to generate assembly for a file
 func.cpp.s:
-	$(MAKE) -f CMakeFiles/OCR.dir/build.make CMakeFiles/OCR.dir/func.cpp.s
+	$(MAKE) -f CMakeFiles/ocr.dir/build.make CMakeFiles/ocr.dir/func.cpp.s
 .PHONY : func.cpp.s
 
 # Help Target
@@ -158,7 +158,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... OCR"
+	@echo "... ocr"
 	@echo "... func.o"
 	@echo "... func.i"
 	@echo "... func.s"

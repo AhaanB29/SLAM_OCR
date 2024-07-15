@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "OCR"
+			"path" : "ocr"
 		}
 	],
 	"backtrace" : 1,
@@ -26,19 +26,19 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 17,
+				"line" : 15,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 20,
+				"line" : 16,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 14,
+				"line" : 12,
 				"parent" : 0
 			}
 		]
@@ -70,7 +70,7 @@
 			]
 		}
 	],
-	"id" : "OCR::@6890427a1f51a3e7e1df",
+	"id" : "ocr::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -268,7 +268,11 @@
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "-lpthread",
+				"fragment" : "-ltesseract",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-llept",
 				"role" : "libraries"
 			},
 			{
@@ -374,8 +378,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "OCR",
-	"nameOnDisk" : "OCR",
+	"name" : "ocr",
+	"nameOnDisk" : "ocr",
 	"paths" : 
 	{
 		"build" : ".",
