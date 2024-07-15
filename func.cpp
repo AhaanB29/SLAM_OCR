@@ -1,15 +1,15 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/dnn.hpp>
-#include <iostream>
-#include <chrono>
 #include <opencv2/text.hpp>
 #include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
-
+#include <iostream>
 #include <string>
- tesseract::TessBaseAPI *tess = new tesseract::TessBaseAPI();
 
-std::string recognizeText(const cv::Mat& image) {
+tesseract::TessBaseAPI *tess = new tesseract::TessBaseAPI();
+
+// Function to recognize text in an image
+std::string recognizeText(const cv::Mat& image, int dpi) {
     // Convert the image to grayscale
     cv::Mat gray;
     if (image.channels() == 3) {
@@ -23,7 +23,7 @@ std::string recognizeText(const cv::Mat& image) {
 
     // Set the image in Tesseract
     tess->SetImage(gray.data, gray.cols, gray.rows, gray.channels(), gray.step);
-    tess->SetSourceResolution(70);
+    tess->SetSourceResolution(dpi);
 
     // Perform OCR
     char* outText = tess->GetUTF8Text();
@@ -34,11 +34,14 @@ std::string recognizeText(const cv::Mat& image) {
 
     return result;
 }
-void detectText(cv::Mat& frame, cv::dnn::Net& net) {
+
+void detectText(cv::Mat& frame, cv::dnn::Net& net, int dpi) {
     // Prepare the input blob
     cv::Mat blob = cv::dnn::blobFromImage(frame, 1.0, cv::Size(320, 320), cv::Scalar(123.68, 116.78, 103.94), true, false);
+
     // Set the input blob
     net.setInput(blob);
+
     // Forward pass to get output
     std::vector<cv::Mat> output;
     std::vector<cv::String> outputNames = { "feature_fusion/Conv_7/Sigmoid", "feature_fusion/concat_3" };
@@ -86,13 +89,13 @@ void detectText(cv::Mat& frame, cv::dnn::Net& net) {
     // Apply non-maximum suppression
     std::vector<int> indices;
     cv::dnn::NMSBoxes(boxes, confidences, scoreThreshold, nmsThreshold, indices);
-    // Scale back the bounding boxes to match the original frame size
-    float scale_x = static_cast<float>(frame.cols)/ 320.0f;
-    float scale_y = static_cast<float>(frame.rows)/ 320.0f;
 
-    // Draw the boxes on the original frame
-    for (size_t i = 0; i < indices.size() ; ++i) {
-        
+    // Scale back the bounding boxes to match the original frame size
+    float scale_x = static_cast<float>(frame.cols) / 320.0f;
+    float scale_y = static_cast<float>(frame.rows) / 320.0f;
+
+    // Draw the boxes on the original frame and extract ROI for OCR
+    for (size_t i = 0; i < indices.size(); ++i) {
         cv::RotatedRect& box = boxes[indices[i]];
         box.center.x *= scale_x;
         box.center.y *= scale_y;
@@ -104,17 +107,16 @@ void detectText(cv::Mat& frame, cv::dnn::Net& net) {
         for (int j = 0; j < 4; ++j) {
             cv::line(frame, vertices[j], vertices[(j + 1) % 4], cv::Scalar(0, 255, 0), 2);
         }
+
+        // Convert the rotated rect to a bounding rectangle
         cv::Rect roi = box.boundingRect();
         roi &= cv::Rect(0, 0, frame.cols, frame.rows);  // Ensure ROI is within frame bounds
+
+        // Extract the ROI
         cv::Mat cropped = frame(roi);
 
-        // Recognize text
-        if (tess->Init(NULL, "eng", tesseract::OEM_LSTM_ONLY)) {
-        std::cerr << "Could not initialize tesseract." << std::endl;
-        return;
-        }
-
-        std::string text = recognizeText(cropped);
+        // Recognize text using the OCR function
+        std::string text = recognizeText(cropped, dpi);
 
         // Draw recognized text
         cv::putText(frame, text, box.center, cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 255), 2);
@@ -122,6 +124,12 @@ void detectText(cv::Mat& frame, cv::dnn::Net& net) {
 }
 
 int main() {
+    // Initialize Tesseract with language and data path
+    if (tess->Init(NULL, "eng", tesseract::OEM_LSTM_ONLY)) {
+        std::cerr << "Could not initialize tesseract." << std::endl;
+        return -1;
+    }
+
     // Load the pre-trained EAST model
     cv::dnn::Net net = cv::dnn::readNet("/home/ahaanbanerjee/SLAM_OCR/frozen_east_text_detection.pb");
 
@@ -138,6 +146,7 @@ int main() {
     int frame_count = 0;
     double fps = 0.0;
     auto start_time = std::chrono::steady_clock::now();
+    int dpi = 70; // Set a default DPI value
 
     while (true) {
         auto start_loop_time = std::chrono::steady_clock::now();
@@ -149,7 +158,7 @@ int main() {
         }
 
         // Detect text and draw bounding boxes
-        detectText(frame, net);
+        detectText(frame, net, dpi);
 
         // Calculate FPS
         frame_count++;
@@ -168,8 +177,6 @@ int main() {
         // Display the frame
         cv::imshow("Camera Feed", frame);
 
-        // Frame time for debugging
-     
         if (cv::waitKey(1) == 'q') {
             break;
         }
@@ -177,5 +184,6 @@ int main() {
 
     cap.release();
     cv::destroyAllWindows();
+    tess->End();
     return 0;
 }
