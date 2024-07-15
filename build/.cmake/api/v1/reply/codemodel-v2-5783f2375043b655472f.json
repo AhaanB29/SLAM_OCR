@@ -8,7 +8,7 @@
 					"build" : ".",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.16"
+						"string" : "3.10"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -38,7 +38,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ocr::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ocr-Debug-c0c1613166316ce572ca.json",
+					"jsonFile" : "target-ocr-Debug-068271773e54301fc37d.json",
 					"name" : "ocr",
 					"projectIndex" : 0
 				}

@@ -9,7 +9,6 @@
 #include <string>
  tesseract::TessBaseAPI *tess = new tesseract::TessBaseAPI();
 
-// Function to create a template for a character
 std::string recognizeText(const cv::Mat& image) {
     // Convert the image to grayscale
     cv::Mat gray;
@@ -20,18 +19,11 @@ std::string recognizeText(const cv::Mat& image) {
     }
 
     // Optional: Apply additional preprocessing if needed
-    // cv::threshold(gray, gray, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
-
-    // Convert the grayscale image to PIX format
-    PIX* pixImage = pixCreate(gray.cols, gray.rows, 8);
-    for (int y = 0; y < gray.rows; y++) {
-        for (int x = 0; x < gray.cols; x++) {
-            pixSetPixel(pixImage, x, y, gray.at<uchar>(y, x));
-        }
-    }
+    cv::threshold(gray, gray, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
 
     // Set the image in Tesseract
-    tess->SetImage(pixImage);
+    tess->SetImage(gray.data, gray.cols, gray.rows, gray.channels(), gray.step);
+    tess->SetSourceResolution(70);
 
     // Perform OCR
     char* outText = tess->GetUTF8Text();
@@ -39,18 +31,14 @@ std::string recognizeText(const cv::Mat& image) {
 
     // Clean up
     delete[] outText;
-    pixDestroy(&pixImage);
 
     return result;
 }
-
 void detectText(cv::Mat& frame, cv::dnn::Net& net) {
     // Prepare the input blob
     cv::Mat blob = cv::dnn::blobFromImage(frame, 1.0, cv::Size(320, 320), cv::Scalar(123.68, 116.78, 103.94), true, false);
-
     // Set the input blob
     net.setInput(blob);
-
     // Forward pass to get output
     std::vector<cv::Mat> output;
     std::vector<cv::String> outputNames = { "feature_fusion/Conv_7/Sigmoid", "feature_fusion/concat_3" };
@@ -63,7 +51,7 @@ void detectText(cv::Mat& frame, cv::dnn::Net& net) {
     // Decode the detections
     std::vector<cv::RotatedRect> boxes;
     std::vector<float> confidences;
-    float scoreThreshold = 0.5;
+    float scoreThreshold = 0.9;
     float nmsThreshold = 0.4;
 
     for (int y = 0; y < scores.size[2]; y++) {
@@ -103,7 +91,7 @@ void detectText(cv::Mat& frame, cv::dnn::Net& net) {
     float scale_y = static_cast<float>(frame.rows)/ 320.0f;
 
     // Draw the boxes on the original frame
-    for (size_t i = 0; i < indices.size(); ++i) {
+    for (size_t i = 0; i < indices.size() ; ++i) {
         
         cv::RotatedRect& box = boxes[indices[i]];
         box.center.x *= scale_x;
