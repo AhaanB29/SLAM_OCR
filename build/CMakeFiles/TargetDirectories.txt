@@ -1,3 +1,4 @@
-/home/ahaanbanerjee/SLAM_OCR/build/CMakeFiles/rebuild_cache.dir
-/home/ahaanbanerjee/SLAM_OCR/build/CMakeFiles/edit_cache.dir
-/home/ahaanbanerjee/SLAM_OCR/build/CMakeFiles/ocr.dir
+/home/pc/ORB_SLAM2/SLAM_OCR/build/CMakeFiles/rebuild_cache.dir
+/home/pc/ORB_SLAM2/SLAM_OCR/build/CMakeFiles/edit_cache.dir
+/home/pc/ORB_SLAM2/SLAM_OCR/build/CMakeFiles/ocr.dir
+/home/pc/ORB_SLAM2/SLAM_OCR/build/CMakeFiles/digits.dir

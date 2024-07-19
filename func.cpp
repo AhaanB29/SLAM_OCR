@@ -9,7 +9,7 @@
 tesseract::TessBaseAPI *tess = new tesseract::TessBaseAPI();
 
 // Function to recognize text in an image
-std::string recognizeText(const cv::Mat& image, int dpi) {
+std::string recognizeText(const cv::Mat& image) {
     // Convert the image to grayscale
     cv::Mat gray;
     if (image.channels() == 3) {
@@ -19,11 +19,14 @@ std::string recognizeText(const cv::Mat& image, int dpi) {
     }
 
     // Optional: Apply additional preprocessing if needed
-    cv::threshold(gray, gray, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
+    //cv::threshold(gray, gray, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
 
     // Set the image in Tesseract
     tess->SetImage(gray.data, gray.cols, gray.rows, gray.channels(), gray.step);
-    tess->SetSourceResolution(dpi);
+    //tess->SetSourceResolution(dpi);
+    //cv::imshow("Cropped Image", gray);
+    //cv::waitKey(0); // Wait for a key press to close the window
+
 
     // Perform OCR
     char* outText = tess->GetUTF8Text();
@@ -35,7 +38,7 @@ std::string recognizeText(const cv::Mat& image, int dpi) {
     return result;
 }
 
-void detectText(cv::Mat& frame, cv::dnn::Net& net, int dpi) {
+void detectText(cv::Mat& frame, cv::dnn::Net& net) {
     // Prepare the input blob
     cv::Mat blob = cv::dnn::blobFromImage(frame, 1.0, cv::Size(320, 320), cv::Scalar(123.68, 116.78, 103.94), true, false);
 
@@ -55,7 +58,7 @@ void detectText(cv::Mat& frame, cv::dnn::Net& net, int dpi) {
     std::vector<cv::RotatedRect> boxes;
     std::vector<float> confidences;
     float scoreThreshold = 0.9;
-    float nmsThreshold = 0.4;
+    float nmsThreshold = 0.1;
 
     for (int y = 0; y < scores.size[2]; y++) {
         const float* scoresData = scores.ptr<float>(0, 0, y);
@@ -114,9 +117,11 @@ void detectText(cv::Mat& frame, cv::dnn::Net& net, int dpi) {
 
         // Extract the ROI
         cv::Mat cropped = frame(roi);
-
+        //upscale the cropped image before passing to the recognition model
+        cv::Mat scaled;
+        cv::resize(cropped, scaled, cv::Size(), 2.5, 2.5, cv::INTER_CUBIC);
         // Recognize text using the OCR function
-        std::string text = recognizeText(cropped, dpi);
+        std::string text = recognizeText(scaled);
 
         // Draw recognized text
         cv::putText(frame, text, box.center, cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 255), 2);
@@ -129,9 +134,9 @@ int main() {
         std::cerr << "Could not initialize tesseract." << std::endl;
         return -1;
     }
-
+    
     // Load the pre-trained EAST model
-    cv::dnn::Net net = cv::dnn::readNet("/home/ahaanbanerjee/SLAM_OCR/frozen_east_text_detection.pb");
+    cv::dnn::Net net = cv::dnn::readNet("/home/pc/ORB_SLAM2/SLAM_OCR/frozen_east_text_detection.pb");
 
     // Open the default camera (0). Change the index if necessary.
     cv::VideoCapture cap(2);
@@ -146,8 +151,6 @@ int main() {
     int frame_count = 0;
     double fps = 0.0;
     auto start_time = std::chrono::steady_clock::now();
-    int dpi = 70; // Set a default DPI value
-
     while (true) {
         auto start_loop_time = std::chrono::steady_clock::now();
 
@@ -158,7 +161,7 @@ int main() {
         }
 
         // Detect text and draw bounding boxes
-        detectText(frame, net, dpi);
+        detectText(frame, net);
 
         // Calculate FPS
         frame_count++;

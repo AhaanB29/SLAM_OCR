@@ -1,7 +1,12 @@
 [
 {
-  "directory": "/home/ahaanbanerjee/SLAM_OCR/build",
-  "command": "/usr/lib/ccache/c++   -isystem /usr/local/include/opencv4  -g   -std=gnu++11 -o CMakeFiles/ocr.dir/func.cpp.o -c /home/ahaanbanerjee/SLAM_OCR/func.cpp",
-  "file": "/home/ahaanbanerjee/SLAM_OCR/func.cpp"
+  "directory": "/home/pc/ORB_SLAM2/SLAM_OCR/build",
+  "command": "/usr/bin/c++   -isystem /usr/local/include/opencv4  -g   -std=gnu++11 -o CMakeFiles/ocr.dir/func.cpp.o -c /home/pc/ORB_SLAM2/SLAM_OCR/func.cpp",
+  "file": "/home/pc/ORB_SLAM2/SLAM_OCR/func.cpp"
+},
+{
+  "directory": "/home/pc/ORB_SLAM2/SLAM_OCR/build",
+  "command": "/usr/bin/c++   -isystem /usr/local/include/opencv4  -g   -std=gnu++11 -o CMakeFiles/digits.dir/digit_recog.cpp.o -c /home/pc/ORB_SLAM2/SLAM_OCR/digit_recog.cpp",
+  "file": "/home/pc/ORB_SLAM2/SLAM_OCR/digit_recog.cpp"
 }
 ]

@@ -6,20 +6,12 @@
 
 #IncludeRegexTransform: 
 
-/home/pc/ORB_SLAM2/SLAM_OCR/func.cpp
+/home/pc/ORB_SLAM2/SLAM_OCR/digit_recog.cpp
 opencv2/opencv.hpp
 -
 opencv2/dnn.hpp
 -
-opencv2/text.hpp
--
-tesseract/baseapi.h
--
-leptonica/allheaders.h
--
 iostream
--
-string
 -
 
 /usr/local/include/opencv4/opencv2/./imgproc/segmentation.hpp

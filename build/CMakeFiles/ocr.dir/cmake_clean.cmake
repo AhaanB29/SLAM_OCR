@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ocr.dir/func.cpp.o"
-  "ocr"
   "ocr.pdb"
+  "ocr"
 )
 
 # Per-language clean rules from dependency scanning.
