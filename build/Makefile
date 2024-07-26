@@ -124,6 +124,19 @@ ocr/fast:
 .PHONY : ocr/fast
 
 #=============================================================================
+# Target rules for targets named yolo
+
+# Build rule for target.
+yolo: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 yolo
+.PHONY : yolo
+
+# fast build rule for target.
+yolo/fast:
+	$(MAKE) -f CMakeFiles/yolo.dir/build.make CMakeFiles/yolo.dir/build
+.PHONY : yolo/fast
+
+#=============================================================================
 # Target rules for targets named digits
 
 # Build rule for target.
@@ -190,6 +203,60 @@ func.cpp.s:
 	$(MAKE) -f CMakeFiles/ocr.dir/build.make CMakeFiles/ocr.dir/func.cpp.s
 .PHONY : func.cpp.s
 
+inference.o: inference.cpp.o
+
+.PHONY : inference.o
+
+# target to build an object file
+inference.cpp.o:
+	$(MAKE) -f CMakeFiles/yolo.dir/build.make CMakeFiles/yolo.dir/inference.cpp.o
+.PHONY : inference.cpp.o
+
+inference.i: inference.cpp.i
+
+.PHONY : inference.i
+
+# target to preprocess a source file
+inference.cpp.i:
+	$(MAKE) -f CMakeFiles/yolo.dir/build.make CMakeFiles/yolo.dir/inference.cpp.i
+.PHONY : inference.cpp.i
+
+inference.s: inference.cpp.s
+
+.PHONY : inference.s
+
+# target to generate assembly for a file
+inference.cpp.s:
+	$(MAKE) -f CMakeFiles/yolo.dir/build.make CMakeFiles/yolo.dir/inference.cpp.s
+.PHONY : inference.cpp.s
+
+main.o: main.cpp.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/yolo.dir/build.make CMakeFiles/yolo.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/yolo.dir/build.make CMakeFiles/yolo.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/yolo.dir/build.make CMakeFiles/yolo.dir/main.cpp.s
+.PHONY : main.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -199,6 +266,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... ocr"
+	@echo "... yolo"
 	@echo "... digits"
 	@echo "... digit_recog.o"
 	@echo "... digit_recog.i"
@@ -206,6 +274,12 @@ help:
 	@echo "... func.o"
 	@echo "... func.i"
 	@echo "... func.s"
+	@echo "... inference.o"
+	@echo "... inference.i"
+	@echo "... inference.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

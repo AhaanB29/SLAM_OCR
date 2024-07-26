@@ -49,5 +49,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/ocr.dir/DependInfo.cmake"
+  "CMakeFiles/yolo.dir/DependInfo.cmake"
   "CMakeFiles/digits.dir/DependInfo.cmake"
   )

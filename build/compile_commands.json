@@ -6,6 +6,16 @@
 },
 {
   "directory": "/home/pc/ORB_SLAM2/SLAM_OCR/build",
+  "command": "/usr/bin/c++   -isystem /usr/local/include/opencv4  -g   -std=gnu++11 -o CMakeFiles/yolo.dir/main.cpp.o -c /home/pc/ORB_SLAM2/SLAM_OCR/main.cpp",
+  "file": "/home/pc/ORB_SLAM2/SLAM_OCR/main.cpp"
+},
+{
+  "directory": "/home/pc/ORB_SLAM2/SLAM_OCR/build",
+  "command": "/usr/bin/c++   -isystem /usr/local/include/opencv4  -g   -std=gnu++11 -o CMakeFiles/yolo.dir/inference.cpp.o -c /home/pc/ORB_SLAM2/SLAM_OCR/inference.cpp",
+  "file": "/home/pc/ORB_SLAM2/SLAM_OCR/inference.cpp"
+},
+{
+  "directory": "/home/pc/ORB_SLAM2/SLAM_OCR/build",
   "command": "/usr/bin/c++   -isystem /usr/local/include/opencv4  -g   -std=gnu++11 -o CMakeFiles/digits.dir/digit_recog.cpp.o -c /home/pc/ORB_SLAM2/SLAM_OCR/digit_recog.cpp",
   "file": "/home/pc/ORB_SLAM2/SLAM_OCR/digit_recog.cpp"
 }

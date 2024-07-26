@@ -180,6 +180,15 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//The directory containing a CMake configuration file for Caffe2.
+Caffe2_DIR:PATH=/home/pc/pytorch/torch/lib/tmp_install/share/cmake/Caffe2
+
+//The directory containing a CMake configuration file for MKLDNN.
+MKLDNN_DIR:PATH=MKLDNN_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for MKL.
+MKL_DIR:PATH=MKL_DIR-NOTFOUND
+
 //The directory containing a CMake configuration file for OpenCV.
 OpenCV_DIR:PATH=/usr/local/lib/cmake/opencv4
 
@@ -188,6 +197,12 @@ SLAM_OCR_BINARY_DIR:STATIC=/home/pc/ORB_SLAM2/SLAM_OCR/build
 
 //Value Computed by CMake
 SLAM_OCR_SOURCE_DIR:STATIC=/home/pc/ORB_SLAM2/SLAM_OCR
+
+//Path to a library.
+TORCH_LIBRARY:FILEPATH=/home/pc/pytorch/torch/lib/tmp_install/lib/libtorch.so
+
+//The directory containing a CMake configuration file for Torch.
+Torch_DIR:PATH=Torch_DIR-NOTFOUND
 
 
 ########################
@@ -266,6 +281,14 @@ CMAKE_GENERATOR:INTERNAL=Unix Makefiles
 CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
+//Have symbol pthread_create
+CMAKE_HAVE_LIBC_CREATE:INTERNAL=
+//Have library pthreads
+CMAKE_HAVE_PTHREADS_CREATE:INTERNAL=
+//Have library pthread
+CMAKE_HAVE_PTHREAD_CREATE:INTERNAL=1
+//Have include pthread.h
+CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/home/pc/ORB_SLAM2/SLAM_OCR
@@ -330,5 +353,9 @@ CMAKE_UNAME:INTERNAL=/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding OpenCV
-FIND_PACKAGE_MESSAGE_DETAILS_OpenCV:INTERNAL=[/usr/local][v4.6.0(4.6)]
+FIND_PACKAGE_MESSAGE_DETAILS_OpenCV:INTERNAL=[/usr/local][v4.8.0(4.6)]
+//Details about finding Threads
+FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
+//Details about finding torch
+FIND_PACKAGE_MESSAGE_DETAILS_torch:INTERNAL=[/home/pc/pytorch/torch/lib/tmp_install/lib/libtorch.so][/home/pc/pytorch/torch/lib/tmp_install/include;/home/pc/pytorch/torch/lib/tmp_install/include/torch/csrc/api/include][v()]
 
